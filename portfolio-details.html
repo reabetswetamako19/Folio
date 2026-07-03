@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PDF Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      background: #898989;
+      padding: 200px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+    }
+
+    input[type=file] {
+      margin: 20px 0;
+    }
+
+    button {
+      background: #ee7f53;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #b8a07e;
+    }
+  </style>
+</head>
+<script>
+  function dragstartHandler(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  function dragoverHandler(ev) {
+    ev.preventDefault();
+  }
+
+  function dropHandler(ev) {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+  }
+</script>
+
+<body>
+  <h1>PDF Converter</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".txt,docx," required>
+    <br>
+    <button type="submit">Convert to PDF</button>
+  </form>
+  <div id="div1" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)"></div>
+
+  <img id="img1" src="img_logo.gif" draggable="true" ondragstart="dragstartHandler(event)" width="336" height="69">
+
+
+</body>
+
+</html>
